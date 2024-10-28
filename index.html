@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>UFO Scene - Masterpiece</title>
+	<style>
+		/* Общие настройки страницы */
+		body {
+			margin: 0;
+			padding: 0;
+			background: linear-gradient(to top, #001219, #005f73);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			overflow: hidden;
+			color: #fff;
+			font-family: 'Arial', sans-serif;
+		}
+
+		/* Контейнер сцены */
+		.scene {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		/* Небо */
+		.sky {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 60%;
+			background: radial-gradient(circle at 50% 100%, #001219, #002a39, #001219);
+			animation: skyShift 10s infinite alternate;
+		}
+
+		/* Звёзды */
+		.stars {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background: transparent;
+		}
+
+		.star {
+			position: absolute;
+			width: 2px;
+			height: 2px;
+			background: white;
+			box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+			border-radius: 50%;
+			animation: twinkle 2s infinite ease-in-out;
+		}
+
+		.star:nth-child(odd) {
+			animation-duration: 3s;
+		}
+
+		.star:nth-child(3n) {
+			animation-duration: 4s;
+		}
+
+		/* Создаем множество звезд */
+		.star {
+			background-color: white;
+			border-radius: 50%;
+			box-shadow: 0 0 5px white;
+		}
+
+		.stars .star:nth-child(1) {
+			top: 10%;
+			left: 15%;
+		}
+
+		.stars .star:nth-child(2) {
+			top: 20%;
+			left: 25%;
+		}
+
+		.stars .star:nth-child(3) {
+			top: 30%;
+			left: 35%;
+		}
+
+		.stars .star:nth-child(4) {
+			top: 40%;
+			left: 45%;
+		}
+
+		.stars .star:nth-child(5) {
+			top: 50%;
+			left: 55%;
+		}
+
+		.stars .star:nth-child(6) {
+			top: 60%;
+			left: 65%;
+		}
+
+		.stars .star:nth-child(7) {
+			top: 70%;
+			left: 75%;
+		}
+
+		.stars .star:nth-child(8) {
+			top: 80%;
+			left: 85%;
+		}
+
+		.stars .star:nth-child(9) {
+			top: 90%;
+			left: 95%;
+		}
+
+		.stars .star:nth-child(10) {
+			top: 5%;
+			left: 50%;
+		}
+
+		/* Анимация звёзд */
+		@keyframes twinkle {
+
+			0%,
+			100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.5;
+			}
+		}
+
+
+
+		/* Общие стили для облаков */
+		.cloud {
+			position: absolute;
+			background: radial-gradient(circle at 50% 50%, #ffffff, #f0f0f0 70%);
+			border-radius: 50%;
+			filter: blur(3px);
+			opacity: 0.9;
+			animation: moveClouds linear infinite;
+		}
+
+		/* Множественные тени для создания объема и формы */
+		.cloud {
+			box-shadow:
+				-60px -10px 60px -10px rgba(255, 255, 255, 0.8),
+				60px -10px 60px -10px rgba(255, 255, 255, 0.8),
+				0px 20px 40px -10px rgba(200, 200, 200, 0.5);
+		}
+
+		/* Псевдоэлементы для добавления сложных форм */
+		.cloud::before,
+		.cloud::after {
+			content: '';
+			position: absolute;
+			background: radial-gradient(circle at 50% 50%, #ffffff, #f0f0f0 70%);
+			border-radius: 50%;
+			filter: blur(3px);
+		}
+
+		.cloud::before {
+			width: 60%;
+			height: 60%;
+			top: -30%;
+			left: -10%;
+			box-shadow:
+				-30px -10px 50px -10px rgba(255, 255, 255, 0.8),
+				30px -10px 50px -10px rgba(255, 255, 255, 0.8);
+		}
+
+		.cloud::after {
+			width: 70%;
+			height: 70%;
+			top: -20%;
+			left: 40%;
+			box-shadow:
+				-20px -10px 40px -10px rgba(255, 255, 255, 0.8),
+				20px -10px 40px -10px rgba(255, 255, 255, 0.8);
+		}
+
+		/* Индивидуальные настройки для каждого облака */
+		.cloud:nth-child(1) {
+			width: 250px;
+			height: 100px;
+			top: 10%;
+			left: -300px;
+			animation-duration: 80s;
+		}
+
+		.cloud:nth-child(2) {
+			width: 300px;
+			height: 120px;
+			top: 20%;
+			left: -350px;
+			animation-duration: 100s;
+			animation-delay: 20s;
+		}
+
+		.cloud:nth-child(3) {
+			width: 200px;
+			height: 80px;
+			top: 15%;
+			left: -250px;
+			animation-duration: 90s;
+			animation-delay: 40s;
+		}
+
+		.cloud:nth-child(4) {
+			width: 280px;
+			height: 110px;
+			top: 5%;
+			left: -400px;
+			animation-duration: 110s;
+			animation-delay: 10s;
+		}
+
+		/* Анимация движения облаков */
+		@keyframes moveClouds {
+			0% {
+				transform: translateX(0);
+			}
+
+			100% {
+				transform: translateX(150vw);
+			}
+		}
+
+		/* Добавляем анимацию изменения формы облака */
+		.cloud {
+			animation: moveClouds linear infinite, changeShape 120s ease-in-out infinite;
+		}
+
+		@keyframes changeShape {
+
+			0%,
+			100% {
+				border-radius: 50%;
+			}
+
+			50% {
+				border-radius: 60% 40% 50% 70% / 60% 50% 70% 40%;
+			}
+		}
+
+		.cloud::before,
+		.cloud::after {
+			animation: changeShape 120s ease-in-out infinite;
+		}
+
+		/* Фон неба */
+		body {
+			background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			height: 100vh;
+			position: relative;
+		}
+
+
+		/* Фон неба с градиентом */
+		body {
+			background: radial-gradient(circle at bottom, #001d4a, #000);
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			height: 100vh;
+			position: relative;
+		}
+
+		/* Звезды */
+		.star {
+			position: absolute;
+			background: radial-gradient(circle, #fff, transparent);
+			border-radius: 50%;
+			opacity: 0.8;
+			animation: twinkle 5s infinite ease-in-out;
+		}
+
+		@keyframes twinkle {
+
+			0%,
+			100% {
+				opacity: 0.8;
+			}
+
+			50% {
+				opacity: 0.2;
+			}
+		}
+
+		/* Случайное расположение звезд */
+		.star:nth-child(1) {
+			width: 2px;
+			height: 2px;
+			top: 10%;
+			left: 20%;
+			animation-delay: 0s;
+		}
+
+		.star:nth-child(2) {
+			width: 3px;
+			height: 3px;
+			top: 30%;
+			left: 40%;
+			animation-delay: 2s;
+		}
+
+		.star:nth-child(3) {
+			width: 1px;
+			height: 1px;
+			top: 50%;
+			left: 60%;
+			animation-delay: 4s;
+		}
+
+
+		/* Фон неба */
+		body {
+			background: radial-gradient(circle at bottom, #001d4a, #000);
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			height: 100vh;
+			position: relative;
+		}
+
+		/* Падающая звезда */
+		.shooting-star {
+			position: absolute;
+			width: 100px;
+			height: 2px;
+			background: linear-gradient(to right, transparent, #fff);
+			top: 20%;
+			left: 10%;
+			transform: rotate(-45deg);
+			animation: shootingStar 3s infinite ease-in-out;
+		}
+
+		@keyframes shootingStar {
+			0% {
+				top: 0%;
+				left: 100%;
+				opacity: 0;
+			}
+
+			50% {
+				top: 50%;
+				left: 50%;
+				opacity: 1;
+			}
+
+			100% {
+				top: 100%;
+				left: 0%;
+				opacity: 0;
+			}
+		}
+
+		/* Улучшенный НЛО */
+		.ufo {
+			position: absolute;
+			width: 220px;
+			height: 80px;
+			background: radial-gradient(ellipse at bottom, #aaa 0%, #777 100%);
+			border-radius: 50% 50% 40% 40%;
+			top: 25%;
+			left: 50%;
+			transform: translateX(-50%);
+			box-shadow:
+				inset 0 -10px 20px rgba(0, 0, 0, 0.5),
+				0 20px 50px rgba(0, 0, 0, 0.3);
+			animation: float 3s infinite ease-in-out, ufoMove 30s infinite linear;
+			z-index: 10;
+			overflow: visible;
+		}
+
+		/* Купол НЛО */
+		.ufo::before {
+			content: '';
+			position: absolute;
+			top: -35px;
+			left: 50%;
+			width: 100px;
+			height: 50px;
+			background: radial-gradient(circle at center, rgba(173, 216, 230, 0.8), rgba(135, 206, 250, 0.5));
+			border-radius: 50%;
+			transform: translateX(-50%);
+			box-shadow:
+				inset 0 0 10px rgba(255, 255, 255, 0.8),
+				0 15px 20px rgba(0, 0, 0, 0.2);
+			z-index: 20;
+		}
+
+		/* Антенна и шарик на НЛО */
+		.ufo::after {
+			content: '';
+			position: absolute;
+			top: -50px;
+			left: 50%;
+			width: 4px;
+			height: 20px;
+			background: #555;
+			transform: translateX(-50%);
+			border-radius: 2px;
+			box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.3);
+		}
+
+		.ufo-antenna-ball {
+			position: absolute;
+			top: -55px;
+			left: 50%;
+			width: 10px;
+			height: 10px;
+			background: radial-gradient(circle at center, #ff0, #f90);
+			border-radius: 50%;
+			transform: translateX(-50%);
+			box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+			animation: antennaBlink 1s infinite alternate;
+		}
+
+		/* Иллюминаторы НЛО */
+		.ufo-windows {
+			position: absolute;
+			top: 20px;
+			left: 50%;
+			width: 160px;
+			height: 30px;
+			transform: translateX(-50%);
+			display: flex;
+			justify-content: space-between;
+			z-index: 15;
+		}
+
+		.ufo-window {
+			position: relative;
+			width: 30px;
+			height: 30px;
+			background: radial-gradient(circle at center, rgba(173, 216, 230, 0.9), rgba(135, 206, 250, 0.7));
+			border-radius: 50%;
+			box-shadow:
+				inset 0 -5px 10px rgba(0, 0, 0, 0.2),
+				0 5px 5px rgba(255, 255, 255, 0.5);
+		}
+
+		/* Силуэт пришельца в иллюминаторе */
+		.ufo-window::before {
+			content: '';
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			width: 20px;
+			height: 20px;
+			background: radial-gradient(circle at center, rgba(0, 0, 0, 0.8), transparent);
+			border-radius: 50%;
+		}
+
+		/* Огоньки НЛО */
+		.ufo-lights {
+			position: absolute;
+			width: 180px;
+			height: 20px;
+			bottom: -10px;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			justify-content: space-between;
+			z-index: 15;
+		}
+
+		.ufo-light {
+			width: 15px;
+			height: 15px;
+			background: radial-gradient(circle at center, #ff0, #f00);
+			border-radius: 50%;
+			box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+			animation: lightBlink 2s infinite;
+		}
+
+		.ufo-light:nth-child(even) {
+			animation-delay: 1s;
+		}
+
+		/* Вращающийся диск вокруг НЛО */
+		.ufo-disk {
+			position: absolute;
+			top: 35px;
+			left: 50%;
+			width: 240px;
+			height: 20px;
+			background: radial-gradient(ellipse at center, rgba(200, 200, 200, 0.5), transparent);
+			border-radius: 50%;
+			transform: translateX(-50%);
+			animation: rotateDisk 10s infinite linear;
+			z-index: 9;
+		}
+
+		/* Луч из НЛО */
+		.beam {
+			position: absolute;
+			top: 60px;
+			left: 50%;
+			width: 100px;
+			height: 300px;
+			background: radial-gradient(ellipse at top center, rgba(255, 255, 0, 0.5), transparent 80%);
+			transform: translateX(-50%);
+			filter: blur(2px);
+			opacity: 0.7;
+			animation: beamPulse 3s infinite ease-in-out, beamMove 5s infinite linear;
+			z-index: 5;
+		}
+
+		/* Анимации */
+		@keyframes float {
+			0% {
+				transform: translate(-50%, 0);
+			}
+
+			50% {
+				transform: translate(-50%, -10px);
+			}
+
+			100% {
+				transform: translate(-50%, 0);
+			}
+		}
+
+		@keyframes antennaBlink {
+			0% {
+				background: radial-gradient(circle at center, #ff0, #f90);
+			}
+
+			50% {
+				background: radial-gradient(circle at center, #f90, #ff0);
+			}
+
+			100% {
+				background: radial-gradient(circle at center, #ff0, #f90);
+			}
+		}
+
+		@keyframes lightBlink {
+
+			0%,
+			100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.2;
+			}
+		}
+
+		@keyframes beamPulse {
+
+			0%,
+			100% {
+				opacity: 0.7;
+			}
+
+			50% {
+				opacity: 0.4;
+			}
+		}
+
+		@keyframes beamMove {
+			0% {
+				transform: translate(-50%, 0) scale(1);
+			}
+
+			50% {
+				transform: translate(-50%, 10px) scale(1.05);
+			}
+
+			100% {
+				transform: translate(-50%, 0) scale(1);
+			}
+		}
+
+		@keyframes rotateDisk {
+			from {
+				transform: translateX(-50%) rotate(0deg);
+			}
+
+			to {
+				transform: translateX(-50%) rotate(360deg);
+			}
+		}
+
+		@keyframes ufoMove {
+			0% {
+				left: 0%;
+				top: 20%;
+			}
+
+			50% {
+				left: 80%;
+				top: 30%;
+			}
+
+			100% {
+				left: 0%;
+				top: 20%;
+			}
+		}
+
+		/* Анимация падающей звезды */
+		@keyframes shootingStar {
+			0% {
+				top: -10%;
+				left: 110%;
+				opacity: 0;
+			}
+
+			50% {
+				top: 50%;
+				left: 50%;
+				opacity: 1;
+			}
+
+			100% {
+				top: 110%;
+				left: -10%;
+				opacity: 0;
+			}
+		}
+
+
+
+		/* Лес */
+		.forest {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 40%;
+			background: linear-gradient(to top, #001d10, transparent);
+		}
+
+		/* Хвойные деревья */
+		.tree {
+			position: absolute;
+			bottom: 0;
+			width: 0;
+			height: 0;
+			border-left: 30px solid transparent;
+			border-right: 30px solid transparent;
+			border-bottom: 80px solid #0b3d19;
+		}
+
+		.tree:nth-child(odd) {
+			border-bottom-color: #0d4e23;
+		}
+
+		.tree:nth-child(even) {
+			border-bottom-color: #116029;
+		}
+
+		.tree::before,
+		.tree::after {
+			content: '';
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			border-left: 40px solid transparent;
+			border-right: 40px solid transparent;
+		}
+
+		.tree::before {
+			bottom: 60px;
+			border-bottom: 100px solid #0d4e23;
+		}
+
+		.tree::after {
+			bottom: 120px;
+			border-bottom: 120px solid #116029;
+		}
+
+		/* Ствол дерева */
+		.tree-trunk {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			width: 12px;
+			height: 50px;
+			background: #5c3d1e;
+			transform: translateX(-50%);
+		}
+
+		/* Тени деревьев */
+		.tree-shadow {
+			position: absolute;
+			bottom: 0;
+			width: 120px;
+			height: 30px;
+			background: radial-gradient(circle, rgba(0, 0, 0, 0.4), transparent);
+			border-radius: 50%;
+			transform: translateX(-50%);
+		}
+
+		/* Расположение деревьев */
+		.tree:nth-child(1) {
+			left: 5%;
+		}
+
+		.tree:nth-child(2) {
+			left: 15%;
+		}
+
+		.tree:nth-child(3) {
+			left: 25%;
+		}
+
+		.tree:nth-child(4) {
+			left: 35%;
+		}
+
+		.tree:nth-child(5) {
+			left: 45%;
+		}
+
+		.tree:nth-child(6) {
+			left: 55%;
+		}
+
+		.tree:nth-child(7) {
+			left: 65%;
+		}
+
+		.tree:nth-child(8) {
+			left: 75%;
+		}
+
+		.tree:nth-child(9) {
+			left: 85%;
+		}
+
+		.tree:nth-child(10) {
+			left: 95%;
+		}
+
+		/* Текст */
+		.text {
+			position: absolute;
+			bottom: 5%;
+			left: 50%;
+			transform: translateX(-50%);
+			font-size: 40px;
+			color: white;
+			text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+			font-family: 'Courier New', monospace;
+			letter-spacing: 3px;
+			text-align: center;
+		}
+
+		/* Анимации */
+		@keyframes float {
+
+			0%,
+			100% {
+				transform: translate(-50%, 0);
+			}
+
+			50% {
+				transform: translate(-50%, -10px);
+			}
+		}
+
+		@keyframes flicker {
+			0% {
+				opacity: 0.5;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		@keyframes beamPulse {
+			from {
+				height: 200px;
+			}
+
+			to {
+				height: 250px;
+				background: rgba(255, 255, 255, 0.3);
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="scene">
+		<div class="sky"></div>
+		<div class="stars">
+			<!-- Звезды -->
+			<div class="star"></div>
+			<div class="star"></div>
+			<div class="star"></div>
+			<div class="star"></div>
+			<div class="star"></div>
+			<div class="star"></div>
+			<div class="star"></div>
+			<div class="star"></div>
+			<div class="star"></div>
+			<div class="star"></div>
+		</div>
+		<!-- Облака -->
+		<div class="cloud"></div>
+		<div class="cloud"></div>
+		<div class="cloud"></div>
+		<div class="cloud"></div>
+
+		<!-- Звезды -->
+		<div class="star"></div>
+		<div class="star"></div>
+		<div class="star"></div>
+		<!-- Добавьте больше звезд -->
+
+		<!-- Падающая звезда -->
+		<div class="shooting-star"></div>
+
+		<!-- НЛО -->
+		<div class="ufo">
+			<div class="ufo-antenna-ball"></div>
+			<div class="ufo-windows">
+				<div class="ufo-window"></div>
+				<div class="ufo-window"></div>
+				<div class="ufo-window"></div>
+			</div>
+			<div class="ufo-lights">
+				<div class="ufo-light"></div>
+				<div class="ufo-light"></div>
+				<div class="ufo-light"></div>
+				<div class="ufo-light"></div>
+				<div class="ufo-light"></div>
+			</div>
+			<div class="ufo-disk"></div>
+			<div class="beam"></div>
+		</div>
+
+		<!-- Лес -->
+		<div class="forest">
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+			<div class="tree">
+				<div class="tree-trunk"></div>
+			</div>
+		</div>
+		<div class="text">I WANT TO BELIEVE</div>
+	</div>
+</body>
+
+</html>
