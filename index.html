@@ -633,115 +633,258 @@
 
 
 
-		/* Лес */
+		:root {
+			--forest-depth: 40vh;
+			--trunk-base: #2c1810;
+			--foliage-1: #1a3c27;
+			--foliage-2: #245239;
+			--foliage-3: #2d6b4a;
+		}
+
 		.forest {
 			position: absolute;
 			bottom: 0;
 			width: 100%;
-			height: 40%;
-			background: linear-gradient(to top, #001d10, transparent);
+			height: var(--forest-depth);
+			background:
+				linear-gradient(176deg,
+					rgba(0, 15, 5, 0.9) 20%,
+					transparent 90%),
+				radial-gradient(ellipse at top,
+					rgba(0, 30, 10, 0.3),
+					transparent 70%);
+			transform-style: preserve-3d;
+			perspective: 1000px;
+			filter: drop-shadow(0 -5px 10px rgba(0, 20, 0, 0.3));
 		}
 
-		/* Хвойные деревья */
 		.tree {
 			position: absolute;
 			bottom: 0;
-			width: 0;
-			height: 0;
-			border-left: 30px solid transparent;
-			border-right: 30px solid transparent;
-			border-bottom: 80px solid #0b3d19;
+			height: calc(var(--forest-depth) * 2);
+			width: 3vw;
+			transform-origin: bottom;
+			animation: sway 8s ease-in-out infinite;
 		}
 
+		.trunk {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 100%;
+			background:
+				linear-gradient(15deg,
+					var(--trunk-base) 30%,
+					#3a2218 50%,
+					var(--trunk-base) 70%),
+				repeating-linear-gradient(90deg,
+					transparent 0 5px,
+					rgba(0, 0, 0, 0.1) 5px 7px);
+			border-radius: 3px;
+			transform:
+				perspective(500px) rotateX(60deg) translateZ(20px);
+			filter: brightness(var(--trunk-brightness, 1));
+		}
+
+		.foliage {
+			position: absolute;
+			width: 300%;
+			height: 60%;
+			bottom: 70%;
+			left: 50%;
+			transform: translateX(-50%);
+			background:
+				radial-gradient(circle at 50% 100%,
+					var(--foliage-1) 10%,
+					var(--foliage-2) 30%,
+					var(--foliage-3) 60%,
+					transparent 80%),
+				repeating-conic-gradient(from 45deg,
+					rgba(0, 0, 0, 0.1) 0deg 15deg,
+					transparent 15deg 30deg);
+			clip-path: polygon(0% 100%,
+					10% 80%, 25% 60%, 40% 40%, 50% 30%,
+					60% 40%, 75% 60%, 90% 80%, 100% 100%);
+			animation: foliage-flow 4s ease-in-out infinite;
+		}
+
+		.shadow {
+			position: absolute;
+			bottom: -5%;
+			width: 250%;
+			height: 20%;
+			left: 50%;
+			background: radial-gradient(ellipse,
+					rgba(0, 10, 0, 0.4) 0%,
+					transparent 70%);
+			transform: translateX(-50%);
+			filter: blur(15px);
+			opacity: 0.7;
+			animation: shadow-pulse 8s ease infinite;
+		}
+
+		/* Анимации */
+		@keyframes sway {
+
+			0%,
+			100% {
+				transform: rotateZ(0.5deg) scaleY(1);
+			}
+
+			50% {
+				transform: rotateZ(-1.2deg) scaleY(1.02);
+			}
+		}
+
+		@keyframes foliage-flow {
+			50% {
+				clip-path: polygon(0% 100%,
+						8% 85%, 22% 65%, 38% 45%, 50% 35%,
+						62% 45%, 78% 65%, 92% 85%, 100% 100%);
+				filter: brightness(1.1);
+			}
+		}
+
+		@keyframes shadow-pulse {
+			50% {
+				transform: translateX(-50%) scale(0.95);
+			}
+		}
+
+		/* Вариации деревьев */
 		.tree:nth-child(odd) {
-			border-bottom-color: #0d4e23;
+			--foliage-1: #18321f;
+			--foliage-2: #21482e;
+			--foliage-3: #2a5f3d;
+			animation-delay: -2s;
 		}
 
-		.tree:nth-child(even) {
-			border-bottom-color: #116029;
+		.tree:nth-child(3n) {
+			--trunk-base: #331c12;
+			filter: hue-rotate(-5deg);
 		}
 
-		.tree::before,
-		.tree::after {
-			content: '';
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			border-left: 40px solid transparent;
-			border-right: 40px solid transparent;
+		.tree:nth-child(4n) {
+			height: calc(var(--forest-depth) * 1.8);
+			width: 2.5vw;
 		}
 
-		.tree::before {
-			bottom: 60px;
-			border-bottom: 100px solid #0d4e23;
-		}
-
-		.tree::after {
-			bottom: 120px;
-			border-bottom: 120px solid #116029;
-		}
-
-		/* Ствол дерева */
-		.tree-trunk {
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			width: 12px;
-			height: 50px;
-			background: #5c3d1e;
-			transform: translateX(-50%);
-		}
-
-		/* Тени деревьев */
-		.tree-shadow {
-			position: absolute;
-			bottom: 0;
-			width: 120px;
-			height: 30px;
-			background: radial-gradient(circle, rgba(0, 0, 0, 0.4), transparent);
-			border-radius: 50%;
-			transform: translateX(-50%);
-		}
-
-		/* Расположение деревьев */
+		/* Позиционирование */
 		.tree:nth-child(1) {
 			left: 5%;
+			--forest-depth: 42vh;
 		}
 
 		.tree:nth-child(2) {
 			left: 15%;
+			--forest-depth: 38vh;
 		}
 
 		.tree:nth-child(3) {
 			left: 25%;
+			--forest-depth: 45vh;
 		}
 
 		.tree:nth-child(4) {
 			left: 35%;
+			--forest-depth: 40vh;
 		}
 
 		.tree:nth-child(5) {
 			left: 45%;
+			--forest-depth: 43vh;
 		}
 
 		.tree:nth-child(6) {
 			left: 55%;
+			--forest-depth: 41vh;
 		}
 
 		.tree:nth-child(7) {
 			left: 65%;
+			--forest-depth: 39vh;
 		}
 
 		.tree:nth-child(8) {
 			left: 75%;
+			--forest-depth: 44vh;
 		}
 
 		.tree:nth-child(9) {
 			left: 85%;
+			--forest-depth: 37vh;
 		}
 
 		.tree:nth-child(10) {
 			left: 95%;
+			--forest-depth: 46vh;
+		}
+
+		@keyframes tree-sway {
+
+			0%,
+			100% {
+				transform: rotateZ(0.5deg);
+			}
+
+			50% {
+				transform: rotateZ(-1.2deg);
+			}
+		}
+
+		@keyframes foliage-move {
+
+			0%,
+			100% {
+				transform: translateX(-50%) scaleY(1);
+				clip-path: polygon(0% 100%,
+						10% 80%, 20% 60%, 30% 40%, 40% 30%,
+						50% 20%, 60% 30%, 70% 40%, 80% 60%,
+						90% 80%, 100% 100%);
+			}
+
+			50% {
+				transform: translateX(-50%) scaleY(1.05);
+				clip-path: polygon(0% 100%,
+						8% 85%, 18% 65%, 28% 45%, 38% 35%,
+						50% 25%, 62% 35%, 72% 45%, 82% 65%,
+						92% 85%, 100% 100%);
+			}
+		}
+
+		@keyframes shadow-sway {
+
+			0%,
+			100% {
+				transform: translateX(-50%) scale(1);
+				opacity: 0.8;
+			}
+
+			50% {
+				transform: translateX(-50%) scale(0.95) skewX(5deg);
+				opacity: 0.6;
+			}
+		}
+
+		/* Вариации для деревьев */
+		.tree:nth-child(odd) {
+			--trunk-width: 12px;
+			--tree-height: 200px;
+		}
+
+		.tree:nth-child(even) {
+			--tree-height: 240px;
+		}
+
+		.tree:nth-child(3n) .foliage {
+			background: radial-gradient(circle at 50% 100%,
+					#2d6048 20%,
+					#1a4832 40%,
+					#0a2b1d 80%);
+		}
+
+		.tree:nth-child(4n) {
+			animation-duration: 7s;
 		}
 
 		/* Текст */
@@ -843,8 +986,7 @@
 			<div class="ufo-disk"></div>
 			<div class="beam"></div>
 		</div>
-
-		<!-- Лес -->
+		<!-- Лес
 		<div class="forest">
 			<div class="tree">
 				<div class="tree-trunk"></div>
@@ -877,6 +1019,60 @@
 				<div class="tree-trunk"></div>
 			</div>
 		</div>
+	-->
+		<div class="forest">
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+			<div class="tree">
+				<div class="trunk"></div>
+				<div class="foliage"></div>
+				<div class="shadow"></div>
+			</div>
+		</div>
+
 		<div class="text">I WANT TO BELIEVE</div>
 	</div>
 </body>
